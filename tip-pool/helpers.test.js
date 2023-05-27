@@ -5,29 +5,27 @@ describe("Utilities test (with setup and tear-down)", function() {
     submitPaymentInfo();
   });
 
-  it('should sum total tip amount of all payments on sumPaymentTotal()', function () {
+  it('should add to total tip amount and calculate all payments on sumPaymentTotal()', function () {
     expect(sumPaymentTotal('tipAmt')).toEqual(20);
 
     billAmtInput.value = 200;
     tipAmtInput.value = 40;
-
     submitPaymentInfo();
 
     expect(sumPaymentTotal('tipAmt')).toEqual(60);
   });
 
-  it('should sum total bill amount of all payments on sumPaymentTotal()', function () {
+  it('should add to total bill amount and calculate all payments on sumPaymentTotal()', function () {
     expect(sumPaymentTotal('billAmt')).toEqual(100);
 
     billAmtInput.value = 200;
     tipAmtInput.value = 40;
-
     submitPaymentInfo();
 
     expect(sumPaymentTotal('billAmt')).toEqual(300);
   });
 
-  it('should sum total tip percent on sumPaymentTotal()', function () {
+  it('should calculate total tip percent on sumPaymentTotal()', function () {
     expect(sumPaymentTotal('tipPercent')).toEqual(20);
 
     billAmtInput.value = 100;
@@ -38,7 +36,7 @@ describe("Utilities test (with setup and tear-down)", function() {
     expect(sumPaymentTotal('tipPercent')).toEqual(40);
   });
 
-  it('should sum tip percent of a single tip on calculateTipPercent()', function () {
+  it('should calculate tip percent of a single tip on calculateTipPercent()', function () {
     expect(calculateTipPercent(100, 23)).toEqual(23);
     expect(calculateTipPercent(111, 11)).toEqual(10);
   });
@@ -65,9 +63,6 @@ describe("Utilities test (with setup and tear-down)", function() {
     billAmtInput.value = '';
     tipAmtInput.value = '';
     paymentTbody.innerHTML = '';
-    summaryTds[0].innerHTML = '';
-    summaryTds[1].innerHTML = '';
-    summaryTds[2].innerHTML = '';
     serverTbody.innerHTML = '';
     allPayments = {};
     paymentId = 0;
