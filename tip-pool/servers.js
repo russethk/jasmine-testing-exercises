@@ -1,12 +1,22 @@
 let serverNameInput = document.getElementById('serverName');
 let serverForm = document.getElementById('serverForm');
-
 let serverTbody = document.querySelector('#serverTable tbody');
-
 let allServers = {};
 let serverId = 0;
 
 serverForm.addEventListener('submit', submitServerInfo);
+
+serverTbody.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete")) {
+    let tr = e.target.parentElement;
+    // remove server from allServers to recalculate tips
+    delete allServers[tr.id];
+    // remove server's row from server table
+    tr.remove();
+
+    updateServerTable();
+  }
+});
 
 // create server object and add to allServers, update html and reset input
 function submitServerInfo(evt) {
@@ -38,7 +48,7 @@ function updateServerTable() {
 
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
-    appendDeleteBtn(newTr, 'server');
+    appendDeleteBtn(newTr);
 
     serverTbody.append(newTr);
   }
